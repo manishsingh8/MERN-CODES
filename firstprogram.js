@@ -1,7 +1,7 @@
 var http = require('http');
-http.createServer(function (req,res){
-    res.write('Hello');//write the response which will display after running on port 8090
-    res.end();//end the response
-}).listen(8090);
-
-
+// var url ='https://github.com/manishsingh8/MERN-CODES';
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  res.write(req.url);
+  res.end();
+}).listen(8080);
