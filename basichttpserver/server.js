@@ -4,25 +4,33 @@ const port = 8000;
 
 const fs = require('fs');
 
+
 function requestHttp(req,res){
-   console.log(req.url);
-   if(req.url === "/home"){
-    res.writeHead(404,{'content-Type':'text/html'});
-    res.write("This is Home Page");
-    res.end();
-   }
-   else{
+   
     res.writeHead(200,{'content-type':'text/html'});
-    fs.readFile('demo.html',function(err,data){
+
+    let filepath;
+
+    switch(req.url){
+        case'/':
+            filepath = './demo.html';
+            break
+        case'/demo2':
+             filepath = './demo2.html';
+             break
+        default:
+             filepath = './Errorpage.html';
+             break            
+}
+    fs.readFile(filepath,function(err,data){
         if(err){
             console.log(err);
-            return;
+            return
         }
         res.write(data);
         res.end();
     })
-     
-   }
+   
 }
 
 const server = http.createServer(requestHttp);
@@ -32,5 +40,5 @@ server.listen(port,function(err){
         console.log(err);
         return;
     }
-    console.log("Server is up and running on port",port);
+    console.log("Server is running on port:",port);
 });
