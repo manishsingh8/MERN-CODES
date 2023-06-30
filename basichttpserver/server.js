@@ -1,7 +1,7 @@
 
 var http = require('http');
 const port = 8000;
-
+var uc = require('upper-case');
 const fs = require('fs');
 
 
@@ -12,7 +12,7 @@ function requestHttp(req,res){
     let filepath;
 
     switch(req.url){
-        case'/':
+        case'/demo1':
             filepath = './demo.html';
             break
         case'/demo2':
