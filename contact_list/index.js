@@ -1,12 +1,17 @@
 
 const express = require('express');
+const path = require('path');
 
 const port =8100;
 
-const app = express();
 
-app.get('/home',function(req,res){
-    res.send("The server is running");
+const app = express();
+app.set('view engine','ejs');
+app.set('views',path.join(__dirname, 'views'));
+
+
+app.get('/',function(req,res){
+     return res.render('home');
 });
 
 
