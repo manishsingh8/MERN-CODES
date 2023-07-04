@@ -1,4 +1,54 @@
 body{
     text-align: center;
-    background-color: cornflowerblue;
+}
+.container{
+    height:auto;
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.inner{
+    width:30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border: 1px solid rgb(172, 160, 160);
+    background-color: rgb(41, 104, 192);
+    color:white;
+    border-radius: .3rem;
+   
+}
+.inner:hover{
+    background-color: rgb(5, 86, 124);
+    color:white;
+    cursor: pointer;
+}
+
+#input-form{
+    width:30%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+   
+    
+}
+.input-field{
+    border:none;
+    border-bottom: 2px solid gray;
+    
+}
+.detail{
+    display: flex;
+    height:auto;
+    width:60%;
+    align-items: center;
+    justify-content: space-between;
+}
+.delete{
+    font-size: large;
+    
+}
+.dlt-btn{
+    color:crimson;
 }

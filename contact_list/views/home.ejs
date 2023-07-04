@@ -1,44 +1,45 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <title><%= title %></title>
-        <link rel="stylesheet" href="/css/home.css">
-        <style>
-            body{
-                background-color: aquamarine;
-            }
-        </style>
-    </head>
-    <body>
-        <h1>This is the contact List</h1>
-        <ul>
-            <table border="1">  
-                    <tr>
-                        <th>Name</th>
-                        <th>City</th>
-                    </tr>
-               
-                <% for(i of contact_list){%>
-                    <tr>
-                        <td> <h4><%= i.name %></h4></td>
-                        <td><p><%= i.city %></p></td>
-                    </tr>
-               
-                <%}%>
-            </table>
-          
-        </ul>
+  <head>
+    <title><%= title %></title>
+    
+    <style>
+      body {
+        background-color: aquamarine;
+      }
+    </style>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <link rel="stylesheet" href="/css/home.css" />
+  </head>
+  <body>
+    <div class="container">
+      
         
-        <form action="/contact-list" method="POST">
-           
-            <input type="text" name="name" placeholder="Enter Name" required>
-            <input type="text" name="city" placeholder="Enter City" required>
-            
-            <button type="submit">Submit</button>
-        </form>
-          
+        <h1>
+            <i class="fa-solid fa-address-card icon"></i>
+            My contact List
+        </h1>
+     
+      <% for(i of contact_list){%>
+      <div class="inner">
+        <div class="detail">
+            <h4><%= i.name %></h4>
+            <p><%= i.city %></p>
+        </div>
+        <div class="delete">
+            <a href="/delete-contact/<%= i.city%>">
+                <i class="fa-solid fa-trash dlt-btn"></i>
+            </a>
+        </div>
+      </div>
+      <%}%>
 
-        <script type="text/javascript" src="/js/home.js">
+      <form action="/contact-list" method="POST" id="input-form">
+        <input type="text" class="input-field" name="name" placeholder="Enter Name" required />
+        <input type="text" class="input-field" name="city" placeholder="Enter City" required />
 
-        </script>
-    </body>
-</html>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+
+    <script type="

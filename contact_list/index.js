@@ -27,6 +27,7 @@ app.set("views", path.join(__dirname, "views"));
 // midleware or parser
 app.use(express.urlencoded());
 
+// Reading the Static file assets
 app.use(express.static('assets'));
 
 
@@ -59,14 +60,21 @@ app.post("/contact-list", function (req, res) {
   return res.redirect("/");
 });
 
-app.delete("/contact-list/:index", function (req, res) {
-    const index = req.params.index;
-    if (index >= 0 && index < contact.length) {
-      contact.splice(index, 1);
+// deleting the contact
+app.get('/delete-contact/:city',(req,res)=>{
+   let city = req.params.city;
+   for(let i=0;i<contact.length;i++){
+    if(contact[i].city === city){
+        contact.splice(i,1);
+        break;
     }
-    return res.redirect("/");
-  });
-  
+   }
+   return res.redirect('/');
+})
+
+
+
+
 app.listen(port, function (err) {
   if (err) {
     console.log("Error", err);
