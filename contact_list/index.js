@@ -1,59 +1,79 @@
-const express = require('express');
-const path = require('path');
+const express = require("express");
+const path = require("path");
 
-const port =8100;
+const port = 8100;
 const app = express();
 
 // contact list
 let contact = [
-    {
-        name:'manish',
-        city:'varanasi'
-    },
-    {
-        name:'prashant',
-        city:'uttarakhand'
-    },
-    {
-        name:'sandeep',
-        city:'agra'
-    }
-
-]
+  {
+    name: "manish",
+    city: "varanasi",
+  },
+  {
+    name: "prashant",
+    city: "uttarakhand",
+  },
+  {
+    name: "sandeep",
+    city: "agra",
+  },
+];
 
 //setting template engine
-app.set('view engine','ejs');
-app.set('views',path.join(__dirname, 'views'));
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
+// midleware or parser
+app.use(express.urlencoded());
 
-
-app.get('/',function(req,res){
-     return res.render('home',{
-        title:"Contact List",
-        contact_list:contact
-    }
-     
-     );
+// middleware1
+app.use(function(req,res,next){
+    console.log('middleware1 is called');
+    next();
 });
 
 
-
-app.get('/practice',function(req,res){
-    return res.render('practice',{title:"Practice Page "});
+app.get("/", function (req, res) {
+  return res.render("home", {
+    title: "Contact List",
+    contact_list: contact,
+  });
 });
 
+app.get("/practice", function (req, res) {
+  return res.render("practice", { title: "Practice Page " });
+});
 
-app.post('/contact-list',function(req,res){
-    // return res.redirect('/practice');
-})
+// rendering the second demopage
 
+app.get("/demo2", (req, res) => {
+  return res.render("loop", {
+    title: "Demo2 Page",
+  });
+});
 
+app.post("/contact-list", function (req, res) {
+  console.log(req.body);
+  // contact.push({
+  //     name:req.body.name,
+  //     city:req.body.city
+  // });
+  contact.push(req.body);
+  return res.redirect("/");
+});
 
-
-
-app.listen(port,function(err){
-    if(err){
-        console.log("Error",err);
+app.delete("/contact-list/:index", function (req, res) {
+    const index = req.params.index;
+    if (index >= 0 && index < contact.length) {
+      contact.splice(index, 1);
     }
-    console.log("Express is running on port:",port);
+    return res.redirect("/");
+  });
+  
+app.listen(port, function (err) {
+  if (err) {
+    console.log("Error", err);
+  }
+  console.log("Express is running on port:", port);
 });
