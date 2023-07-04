@@ -27,11 +27,7 @@ app.set("views", path.join(__dirname, "views"));
 // midleware or parser
 app.use(express.urlencoded());
 
-// middleware1
-app.use(function(req,res,next){
-    console.log('middleware1 is called');
-    next();
-});
+app.use(express.static('assets'));
 
 
 app.get("/", function (req, res) {
