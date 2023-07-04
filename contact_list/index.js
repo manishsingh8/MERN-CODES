@@ -61,13 +61,11 @@ app.post("/contact-list", function (req, res) {
 });
 
 // deleting the contact
-app.get('/delete-contact/:city',(req,res)=>{
-   let city = req.params.city;
-   for(let i=0;i<contact.length;i++){
-    if(contact[i].city === city){
-        contact.splice(i,1);
-        break;
-    }
+app.get('/delete-contact',(req,res)=>{
+   let city = req.query.city;
+   let index = contact.findIndex(contact => contact.city === city);//it will return -1 if no city found otherwise indexnumber
+   if(index != -1){
+    contact.splice(index,1);
    }
    return res.redirect('/');
 })
