@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 
 const port = 8100;
+const db = require('./config/mongoose');
 const app = express();
 
 // contact list
@@ -43,7 +44,6 @@ app.get("/practice", function (req, res) {
 });
 
 // rendering the second demopage
-
 app.get("/demo2", (req, res) => {
   return res.render("loop", {
     title: "Demo2 Page",
@@ -67,7 +67,7 @@ app.get('/delete-contact',(req,res)=>{
    if(index != -1){
     contact.splice(index,1);
    }
-   return res.redirect('/');
+   return res.redirect('back');
 })
 
 
