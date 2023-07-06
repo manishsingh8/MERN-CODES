@@ -3,7 +3,21 @@ const path = require("path");
 
 const port = 8100;
 const db = require('./config/mongoose');
+const Contact = require('./models/contact');
+
 const app = express();
+
+
+//setting template engine
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+
+// midleware or parser
+app.use(express.urlencoded());
+
+// Reading the Static file assets
+app.use(express.static('assets'));
+
 
 // contact list
 let contact = [
@@ -20,17 +34,6 @@ let contact = [
     city: "agra",
   },
 ];
-
-//setting template engine
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
-
-// midleware or parser
-app.use(express.urlencoded());
-
-// Reading the Static file assets
-app.use(express.static('assets'));
-
 
 app.get("/", function (req, res) {
   return res.render("home", {
